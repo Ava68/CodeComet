@@ -6,24 +6,17 @@ import { BlogPost } from '../models/blog-post.model';
 @Component({
   selector: 'app-blogpost-list',
   templateUrl: './blogpost-list.component.html',
-  styleUrls: ['./blogpost-list.component.css']
+  styleUrls: ['./blogpost-list.component.css'],
 })
 export class BlogpostListComponent implements OnInit {
+  blogPosts$?: Observable<BlogPost[]>;
+  blogpost: any;
 
-  blogPosts$? : Observable<BlogPost[]> ;
-
-  constructor(private blogPostService: BlogPostService) {
-
-  }
+  constructor(private blogPostService: BlogPostService) {}
 
   // use async pipe to handle subscription and unsubscription
   ngOnInit(): void {
     // get all blogposts from API
     this.blogPosts$ = this.blogPostService.getAllBlogPosts();
-    
-    
   }
-
-  
-
 }
