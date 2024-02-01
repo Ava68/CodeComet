@@ -61,7 +61,7 @@
             >Featured Image Url</label
           >
 
-          <ng-container *ngIf="model.featuredImageUrl !== ''">
+          <ng-container *ngIf="model.featuredImageUrl !== '' && value == true">
             <div>
               <img [src]="model.featuredImageUrl" height="100" class="my-2" />
             </div>

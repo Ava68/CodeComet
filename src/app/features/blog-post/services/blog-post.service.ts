@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AddBlogPost } from '../models/add-blog-post.model';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { BlogPost } from '../models/blog-post.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -36,6 +36,22 @@ export class BlogPostService {
     return this.http.put<BlogPost>(
       `${environment.apiBaseUrl}/api/blogposts/${id}`,
       updatedBlogPost
+    );
+  }
+
+  isValidImageUrl(url: string): Observable<boolean> {
+    return this.http.head(url, { observe: 'response' }).pipe(
+      map((response) => {
+        // Check if the response status code indicates success (2xx)
+        if (response.status >= 200 && response.status < 300) {
+          return true;
+        } else if (response.status === 404) {
+          return false;
+        } else {
+          // Handle other error statuses if needed
+          return false;
+        }
+      })
     );
   }
 }

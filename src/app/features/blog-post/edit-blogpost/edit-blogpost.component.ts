@@ -20,7 +20,8 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   routeSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
   getBlogPostSubscription?: Subscription;
-
+  imageUrl?: string;
+  value: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private blogPostService: BlogPostService,
@@ -42,12 +43,29 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
             .subscribe({
               next: (response) => {
                 this.model = response;
+                this.imageUrl = this.model?.featuredImageUrl;
                 this.selectedCategories = response.categories.map((x) => x.id);
+                this.checkImageUrlValidity(this.imageUrl);
               },
             });
       },
     });
   }
+  checkImageUrlValidity(url: string): void {
+    this.blogPostService.isValidImageUrl(url).subscribe({
+      next: (isValid) => {
+        if (isValid) {
+          this.value = true;
+        } else {
+          this.value = false;
+        }
+      },
+      error: (err) => {
+        console.error('Error checking image URL:', err);
+      },
+    });
+  }
+
   onFormSubmit(): void {
     // convert model to request object
     if (this.model && this.id) {
