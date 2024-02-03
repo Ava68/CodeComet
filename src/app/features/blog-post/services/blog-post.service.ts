@@ -39,6 +39,12 @@ export class BlogPostService {
     );
   }
 
+  deleteBlogPost(id: string): Observable<BlogPost> {
+    return this.http.delete<BlogPost>(
+      `${environment.apiBaseUrl}/api/blogposts/${id}`
+    );
+  }
+
   isValidImageUrl(url: string): Observable<boolean> {
     return this.http.head(url, { observe: 'response' }).pipe(
       map((response) => {
