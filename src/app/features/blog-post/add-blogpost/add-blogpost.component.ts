@@ -48,13 +48,12 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(): void {
-    console.log(this.model);
     this.blogPostService.createBlogPost(this.model).subscribe({
       next: (resp) => {
         this.router.navigateByUrl('/admin/blogposts');
       },
       error: (err) => {
-        console.log(err);
+        console.error(err);
       },
     });
   }
