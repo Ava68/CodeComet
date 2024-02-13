@@ -5,8 +5,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # CodeComet API
 https://github.com/Ava68/CodeCometBackend/tree/dev
 
-## Development server
-
 ### Read(normal) User section
 ![Screenshot 2024-02-14 at 2 29 40 AM](https://github.com/Ava68/CodeComet/assets/63304698/5e98d556-d155-460f-9d8b-a11565a11670)
 
